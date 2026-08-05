@@ -1,0 +1,536 @@
+/* --------------------------------------------------------------------------
+   Demo stages.
+
+   Every stage sets its own resting state in CSS. The recipes animate with
+   fill "none" or "both" on purpose, so cancelling an animation always returns
+   the stage to exactly what is declared here. That is what makes Replay
+   idempotent instead of cumulative.
+   -------------------------------------------------------------------------- */
+
+.stage > * {
+  will-change: transform, opacity;
+}
+
+/* 1. Spring press ---------------------------------------------------------- */
+
+.stage--spring-press .press__btn {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 620;
+  font-size: var(--step--1);
+  letter-spacing: 0.01em;
+}
+
+.stage--spring-press .press__glow {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 68%);
+  opacity: 0;
+}
+
+/* 2. Magnetic hover -------------------------------------------------------- */
+
+.stage--magnetic-hover .magnet__dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.stage--magnetic-hover .magnet__dot svg {
+  width: 22px;
+  height: 22px;
+}
+
+.stage--magnetic-hover .magnet__field {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1px dashed var(--border-strong);
+  opacity: 0;
+}
+
+/* 3. Stagger reveal -------------------------------------------------------- */
+
+.stage--stagger-reveal .rows {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 78%;
+}
+
+.stage--stagger-reveal .row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 7px var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: var(--step--2);
+  color: var(--text-dim);
+}
+
+.stage--stagger-reveal .row__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+
+.stage--stagger-reveal .row__label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stage--stagger-reveal .row__bar {
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-strong);
+  flex: none;
+}
+
+/* 4. Shared element morph -------------------------------------------------- */
+
+.stage--shared-element-morph {
+  padding: var(--space-4);
+}
+
+.stage--shared-element-morph .flip__card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 92px;
+  height: 92px;
+  padding: var(--space-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.stage--shared-element-morph.is-expanded .flip__card {
+  width: 100%;
+  height: 100%;
+}
+
+.stage--shared-element-morph .flip__thumb {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(140deg, var(--accent) 0%, var(--accent-line) 100%);
+}
+
+.stage--shared-element-morph .flip__body {
+  display: none;
+  flex-direction: column;
+  min-width: 0;
+  font-size: var(--step--2);
+  color: var(--text-dim);
+}
+
+.stage--shared-element-morph.is-expanded .flip__body {
+  display: flex;
+}
+
+.stage--shared-element-morph .flip__body strong {
+  color: var(--text);
+  font-size: var(--step--1);
+}
+
+/* 5. Elastic drawer -------------------------------------------------------- */
+
+.stage--elastic-drawer {
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.stage--elastic-drawer .drawer__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+}
+
+.stage--elastic-drawer .drawer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 62%;
+  padding: var(--space-4) var(--space-3);
+  border-left: 1px solid var(--border-strong);
+  background: var(--surface);
+  transform: translateX(100%);
+}
+
+.stage--elastic-drawer .drawer__handle {
+  width: 26px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border-strong);
+  margin-bottom: var(--space-2);
+}
+
+.stage--elastic-drawer .drawer__item {
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  font-size: var(--step--2);
+  color: var(--text-dim);
+}
+
+/* 6. Number ticker --------------------------------------------------------- */
+
+.stage--number-ticker {
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.stage--number-ticker .ticker {
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.stage--number-ticker .ticker__unit,
+.stage--number-ticker .ticker__sep {
+  color: var(--text-faint);
+}
+
+.stage--number-ticker .digit {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.stage--number-ticker .digit__strip {
+  display: block;
+}
+
+.stage--number-ticker .digit__strip span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stage--number-ticker .ticker__delta {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+
+/* 7. Skeleton to content --------------------------------------------------- */
+
+.stage--skeleton-to-content .skeleton,
+.stage--skeleton-to-content .loaded {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0 var(--space-5);
+}
+
+.stage--skeleton-to-content .loaded {
+  opacity: 0;
+}
+
+.stage--skeleton-to-content .skeleton__avatar,
+.stage--skeleton-to-content .loaded__avatar {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+.stage--skeleton-to-content .skeleton__avatar {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+
+.stage--skeleton-to-content .loaded__avatar {
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  font-size: var(--step--1);
+  font-weight: 620;
+}
+
+.stage--skeleton-to-content .skeleton__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+
+.stage--skeleton-to-content .skeleton__line {
+  height: 10px;
+  border-radius: 5px;
+  background:
+    linear-gradient(90deg, transparent 0%, var(--accent-soft) 45%, transparent 90%) no-repeat,
+    var(--surface-raised);
+  background-size: 60% 100%;
+  border: 1px solid var(--border);
+}
+
+.stage--skeleton-to-content .loaded__text {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--step--2);
+  color: var(--text-dim);
+}
+
+.stage--skeleton-to-content .loaded__text strong {
+  color: var(--text);
+  font-size: var(--step--1);
+}
+
+/* 8. Icon state morph ------------------------------------------------------ */
+
+.stage--icon-state-morph .bars {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 40px;
+}
+
+.stage--icon-state-morph .bars__bar {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--text);
+}
+
+/* 9. Success checkmark ----------------------------------------------------- */
+
+.stage--success-checkmark .check {
+  width: 108px;
+  height: 108px;
+}
+
+.stage--success-checkmark .check__ring {
+  fill: var(--accent-soft);
+  stroke: var(--accent-line);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+}
+
+/* Undrawn at rest. The dash pattern is longer than the path, so an offset of
+   the same size parks the whole path inside the gap. The recipe replaces both
+   values inline with the measured length before it animates. */
+.stage--success-checkmark .check__path {
+  stroke: var(--accent);
+  stroke-width: 4.5;
+  fill: none;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+}
+
+/* 10. Attention shake ------------------------------------------------------ */
+
+.stage--attention-shake .shake {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 78%;
+}
+
+.stage--attention-shake .field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+  border: 1px solid #d9534f;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.stage--attention-shake .field__flash {
+  position: absolute;
+  inset: 0;
+  background: rgba(217, 83, 79, 0.16);
+  opacity: 0;
+}
+
+.stage--attention-shake .field__label {
+  font-size: var(--step--2);
+  color: var(--text-faint);
+}
+
+.stage--attention-shake .field__value {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text);
+}
+
+.stage--attention-shake .field__message {
+  font-size: var(--step--2);
+  color: #d9534f;
+  opacity: 0;
+}
+
+/* 11. Progress arc --------------------------------------------------------- */
+
+.stage--progress-arc .arc {
+  position: relative;
+  width: 132px;
+  height: 132px;
+}
+
+.stage--progress-arc .arc svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.stage--progress-arc .arc__track,
+.stage--progress-arc .arc__value {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.stage--progress-arc .arc__track {
+  stroke: var(--border);
+}
+
+.stage--progress-arc .arc__value {
+  stroke: var(--accent);
+  stroke-dashoffset: 327;
+}
+
+.stage--progress-arc .arc__label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 12. Card lift ------------------------------------------------------------ */
+
+.stage--card-lift .lift__card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 62%;
+  padding: var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+/* A separate shadow layer, so the hover animates opacity instead of
+   box-shadow. Animating box-shadow itself repaints on every frame. */
+.stage--card-lift .lift__shadow {
+  position: absolute;
+  width: 58%;
+  height: 74px;
+  border-radius: var(--radius);
+  box-shadow: 0 22px 34px -14px rgba(0, 0, 0, 0.85);
+  opacity: 0;
+}
+
+.stage--card-lift .lift__tag {
+  align-self: flex-start;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--step--2);
+  letter-spacing: 0.08em;
+}
+
+.stage--card-lift .lift__title {
+  font-size: var(--step-1);
+  letter-spacing: -0.02em;
+}
+
+.stage--card-lift .lift__meta {
+  font-size: var(--step--2);
+  color: var(--text-faint);
+}
+
+/* 13. Text scramble -------------------------------------------------------- */
+
+.stage--text-scramble .scramble {
+  font-family: var(--font-mono);
+  font-size: var(--step-2);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  white-space: pre;
+}
+
+/* 14. Page transition wipe ------------------------------------------------- */
+
+.stage--page-transition-wipe .wipe {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.stage--page-transition-wipe .wipe__page {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: var(--step-2);
+  letter-spacing: -0.02em;
+}
+
+.stage--page-transition-wipe .wipe__page--b {
+  opacity: 0;
+}
+
+.stage--page-transition-wipe .wipe__eyebrow {
+  font-size: var(--step--2);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.stage--page-transition-wipe .wipe__mask {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateX(-101%);
+}

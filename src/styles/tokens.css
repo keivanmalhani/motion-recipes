@@ -1,0 +1,105 @@
+/* --------------------------------------------------------------------------
+   Design tokens.
+
+   One accent hue. A 1.25 modular type scale. A neutral ramp that is warm on
+   purpose, because a perfectly neutral grey reads as unfinished next to an
+   amber accent.
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Type scale, 1.25 ratio, 16px base. */
+  --step--2: 0.7rem;
+  --step--1: 0.82rem;
+  --step-0: 1rem;
+  --step-1: 1.2rem;
+  --step-2: 1.45rem;
+  --step-3: 1.8rem;
+  --step-4: 2.25rem;
+  --step-5: clamp(2.4rem, 1.4rem + 3.4vw, 4rem);
+
+  /* Spacing, 4px base. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  --measure: 62ch;
+  --shell: 1220px;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", "Fira Code", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  /* Motion tokens, mirroring src/core/easing.ts. */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-snappy: cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+/* Dark is the default and the designed-for case. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0a0a0c;
+  --bg-veil: rgba(10, 10, 12, 0.72);
+  --surface: #121215;
+  --surface-raised: #17171b;
+  --surface-sunken: #0e0e11;
+  --border: #26262d;
+  --border-strong: #38383f;
+
+  --text: #f2f2f4;
+  --text-dim: #a3a3ad;
+  --text-faint: #6d6d78;
+
+  --accent: #ffb224;
+  --accent-hover: #ffc04d;
+  --accent-ink: #17120a;
+  --accent-soft: rgba(255, 178, 36, 0.13);
+  --accent-line: rgba(255, 178, 36, 0.34);
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-lift: 0 18px 40px -18px rgba(0, 0, 0, 0.9);
+  --grid-line: rgba(255, 255, 255, 0.045);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #fbfaf8;
+  --bg-veil: rgba(251, 250, 248, 0.78);
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f3f1ed;
+  --border: #e3e0da;
+  --border-strong: #cdc9c1;
+
+  --text: #17161a;
+  --text-dim: #5c5a63;
+  --text-faint: #8b8892;
+
+  --accent: #a35a00;
+  --accent-hover: #8a4c00;
+  --accent-ink: #fffaf0;
+  --accent-soft: rgba(163, 90, 0, 0.09);
+  --accent-line: rgba(163, 90, 0, 0.26);
+
+  --shadow-card: 0 1px 2px rgba(23, 22, 26, 0.05);
+  --shadow-lift: 0 18px 38px -20px rgba(23, 22, 26, 0.35);
+  --grid-line: rgba(23, 22, 26, 0.04);
+}
