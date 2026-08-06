@@ -86,7 +86,7 @@ export function createCard(recipe: Recipe, index: number): CardHandle {
     el("p", { class: "card__blurb" }, [recipe.blurb]),
     el("details", { class: "card__code" }, [
       el("summary", {}, ["View source"]),
-      el("pre", {}, [code]),
+      el("pre", { tabindex: "0", role: "region", "aria-label": `${recipe.title} source, scrollable` }, [code]),
     ]),
   ]);
 
