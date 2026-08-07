@@ -6,7 +6,7 @@
 
 **La mayoria de las microinteracciones no necesitan una libreria de animacion de 70 KB.**
 
-[English](./README.md) | [Espanol](./README.es.md)
+[English](./README.md) | Espanol
 
 ---
 
