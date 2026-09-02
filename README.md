@@ -6,8 +6,6 @@
 
 **Most micro-interactions do not need a 70 KB animation library.**
 
-English | [Espanol](./README.es.md)
-
 ---
 
 ## What this is
